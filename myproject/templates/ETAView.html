@@ -1,0 +1,122 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--=============================================================-->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4"><i class="micon dw dw-karate"></i>-Order Qty Report</h4>
+
+    </div>
+    <div class="pb-20">
+        <table class="table hover data-table-export">
+            <thead>
+            <tr class="bg-primary">
+                <th>Serial Number</th>
+                
+                <th>Vendor</th>
+                <th>End User</th>
+                <th>Style#</th>
+                <th>Item</th>
+                <th>Delivery Date</th>
+                
+                <th>fabricETA</th>
+                <th>accETA</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in orderqty %}
+            <tr class="">
+                <td class="table-plus text-center">{{p.serial_number}}-{{p.id}}</td>
+                
+                <td>{{p.vendor}}</td>
+                <td>{{p.buyer}}</td>
+                <td>{{p.style}}</td>
+                <td>{{p.item}}</td>
+                <td>
+
+                    <a
+                            href="#"
+
+                    ><strong>{{p.delivery}}</strong>
+                        {% if not p.delivery %}
+                            <i class="text-danger micon dw dw-edit3"></i>
+                        {% endif %}
+                        </a>
+
+                </td>
+                
+                <td>{{p.fabricETA}}</td>
+                <td><a
+                                    href="#"
+                                    class="btn-block"
+                                    data-toggle="modal"
+                                    data-target="#bd-example-modal-lg{{p.id}}"
+                                    type="button"
+                                >
+                                    {{p.accETA}}
+                                </a>
+                                <div
+                                    class="modal fade bs-example-modal-lg"
+                                    id="bd-example-modal-lg{{p.id}}"
+                                    tabindex="-1"
+                                    role="dialog"
+                                    aria-labelledby="myLargeModalLabel"
+                                    aria-hidden="true"
+                                >
+                                    <div class="modal-dialog modal-lg modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title" id="myLargeModalLabel">
+                                                    Large modal{{p.id}}
+                                                </h4>
+                                                <button
+                                                    type="button"
+                                                    class="close"
+                                                    data-dismiss="modal"
+                                                    aria-hidden="true"
+                                                >
+                                                    ×
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="form-group row">
+                                            <label class="col-sm-12 col-md-2 col-form-label">Order_Date</label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <input class="form-control" type="date" placeholder="" name="etadate">
+                                            </div>
+                                        </div>
+                                                
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button
+                                                    type="button"
+                                                    class="btn btn-secondary"
+                                                    data-dismiss="modal"
+                                                >
+                                                    Close
+                                                </button>
+                                                <button type="button" class="btn btn-primary">
+                                                    Save changes
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                </td>
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}

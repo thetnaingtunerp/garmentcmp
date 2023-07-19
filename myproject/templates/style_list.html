@@ -1,0 +1,222 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--=============================================================-->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <!--        <h4 class="text-blue h4"><i class="micon dw dw-karate"></i>-Style List</h4>-->
+        <a
+                href="#"
+                class="btn btn-outline-primary"
+                data-toggle="modal"
+                data-target="#Medium-modal"
+                type="button"
+        >
+            <i class="micon dw dw-add"> Create Style</i>
+        </a>
+        <div
+                class="modal fade"
+                id="Medium-modal"
+                tabindex="-1"
+                role="dialog"
+                aria-labelledby="myLargeModalLabel"
+                aria-hidden="true"
+
+        >
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title" id="myLargeModalLabel">
+                            Create New Style Code
+                        </h4>
+                        <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-hidden="true"
+                        >
+                            ×
+                        </button>
+                    </div>
+                    <form action="{% url 'myapp:StyleView' %}" method="post">{% csrf_token %}
+                        <div class="modal-body">
+                            <p>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label"><strong class="">Buyer</strong></label>
+                                <select
+                                        class="custom-select2 form-control col-sm-12 col-md-4"
+                                        name="buyer_name"
+                                        style="width: 80%; height: 38px"
+                                >
+                                    {% for i in buyer %}
+                                    <option value="{{i.BuyerName}}">{{i.BuyerName}}</option>
+                                    {% endfor %}
+
+                                </select>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Style Code</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" type="text" placeholder="" name="style_code">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Item</label>
+                                <div class="col-sm-12 col-md-10">
+                                    <input class="form-control" type="text" placeholder="" name="item">
+                                </div>
+                            </div>
+
+                            </p>
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                            <input class="btn btn-success" type="submit" value="Create Style">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-primary">
+
+                <th class="text-center">Vendor Name</th>
+                <th class="text-center">Buyer Name</th>
+                <th class="text-center">Style Code</th>
+                <th class="text-center">Item</th>
+                <th>New Order</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in style %}
+            <tr class="">
+                <td class="table-plus text-center"><a href="#"><b>{{p.Vendor}}</b></a></td>
+                <td>{{p.BuyerName}}</td>
+                <td>{{p.StyleCode}}</td>
+                <td>{{p.ItemName}}</td>
+                <td>
+                    <div class="table-actions">
+
+<!-- -------------------------------------------------------------------- -->
+
+                        <a
+                                href="#"
+                                class="btn btn-sm btn-outline-primary"
+                                data-toggle="modal"
+                                data-target="#success-modal{{p.id}}"
+                                type="button"
+                        >
+                            NewOrder
+                        </a>
+                        <div
+                                class="modal fade"
+                                id="success-modal{{p.id}}"
+                                tabindex="-1"
+                                role="dialog"
+                                aria-labelledby="exampleModalCenterTitle"
+                                aria-hidden="true"
+                        >
+                            <div
+                                    class="modal-dialog modal-dialog-centered"
+                                    role="document"
+                            >
+                                <div class="modal-content">
+                                    <form action="{% url 'myapp:SaveOrderQty' %}" method="post">{% csrf_token %}
+                                    <div class="modal-body text-center font-18">
+                                        <h3 class="mb-20">New Order-{{p.StyleCode}}</h3>
+                                        <div class="form-group row">
+                                            <label class="col-sm-12 col-md-2 col-form-label">Order_Date</label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <input class="form-control" type="date" placeholder="" name="order_date">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-12 col-md-2 col-form-label">OrderQty</label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <input class="form-control" type="number" placeholder=""
+                                                       name="order_qty" step="any">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label class="col-sm-12 col-md-2 col-form-label">CMP</label>
+                                            <div class="col-sm-12 col-md-10">
+                                                <input class="form-control" type="number" placeholder=""
+                                                       name="cmp_amount" step="any">
+                                            </div>
+                                        </div>
+                                        <input type="text" value="{{p.BuyerName}}" name="buyer" hidden="true">
+                                        <input type="text" value="{{p.StyleCode}}" name="style_code" hidden="true">
+                                        <input type="text" value="{{p.ItemName}}" name="item" hidden="true">
+
+                                        <input type="number" value="0" name="making_charge" hidden="true">
+                                        <input type="number" value="0" name="import_export_charge" hidden="true">
+                                        <input type="number" value="0" name="box_charge" hidden="true">
+                                        <input type="number" value="0" name="poly_bag" hidden="true">
+                                        <input type="number" value="0" name="sewing_thread" hidden="true">
+                                        <input type="text" value="{{p.Vendor}}" name="vendor" hidden="true">
+
+
+                                    </div>
+                                    <div class="modal-footer justify-content-center">
+                                        <button
+                                                type="button"
+                                                class="btn btn-primary"
+                                                data-dismiss="modal"
+                                        >
+                                            Done
+                                        </button>
+                                        <button
+                                                type="submit"
+                                                class="btn btn-success"
+
+                                        >
+                                            Save New Order
+                                        </button>
+
+                                    </div>
+                                        </form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--=--------------------------------==-->
+
+                    </div>
+                </td>
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+<!--==============================-->
+{% if message %}
+                <li class="text-danger">{{message}}</a></li>
+
+
+            {% endif %}
+            {% if success %}
+            <div class="text-success">
+                {{success}}
+            </div>
+            {% endif %}
+
+{% endblock content %}

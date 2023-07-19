@@ -1,0 +1,185 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="row">
+
+<div class="col-lg-3 col-md-6 col-sm-12 mb-1">
+                            <div class="pd-20 card-box height-100-p">
+                                <h4 class="mb-20 h4">Production Lines</h4>
+                                <div class="list-group">
+                                    <a href="{% url 'myapp:DailyTargetView' %}" class="list-group-item list-group-item-action active"><h5>All</h5></a>
+
+                                    {% for i in line %}
+                                    <a href="{% url 'myapp:DailyTargetFilterView' %}?pline={{i.ProductionLine}}" class="list-group-item list-group-item-action"><h5>{{i.ProductionLine}}</h5></a>
+
+                                    {% endfor %}
+                                    
+                                </div>
+                            </div>
+                        </div>
+
+<!-- ----------------------- -->
+<div class="card-box height-100-p col-md-9">
+    <br>
+    <h3 class="mb-20 h4">Daily Target Production</h3>
+<div class="pb-20">
+
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-primary">
+
+                <th class="">Line Name</th>
+                <th class="">Style</th>
+                <th class="">Daily Target Qty</th>
+                                <th class="">Status</th>
+                <!--                <th>Vou</th>-->
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in pro_input %}
+            <tr class="">
+                <td class="table-plus">{{p.line}}</td>
+                <td>
+                
+                <!-- ------------------------- -->
+                <a
+                    href="#"
+                    class="btn-block text-blue"
+                    data-toggle="modal"
+                    data-target="#bd-example-modal-lg{{p.id}}"
+                    type="button"
+            >
+               
+                <strong>{{p.style}}</strong>
+            </a>
+            <div
+                    class="modal fade bs-example-modal-lg"
+                    id="bd-example-modal-lg{{p.id}}"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="myLargeModalLabel"
+                    aria-hidden="true"
+            >
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">
+                                {{p.line}}
+                            </h4>
+                           
+                            <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-hidden="true"
+                            >
+                                ×
+                            </button>
+                        </div>
+                        <form action="{% url 'myapp:DailyTargetView' %}" method="post">{% csrf_token %}
+                        <div class="modal-body">
+                            <h5>Style No - {{p.style}}</h5>
+                            <input type="text" value="{{p.line}}" name="line" hidden>
+                            <input type="text" value="{{p.style}}" name="style" hidden>
+                            <input type="text" value="{{p.input_qty}}" name="input_qty" hidden>
+                            <br>
+
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Daily Target Qty</label>
+                                <div class="col-sm-12 col-md-8">
+                                    <input class="form-control" type="number" value ="{{p.daily_target}}" name="target_qty">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                    type="button"
+                                    class="btn btn-outline-secondary"
+                                    data-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-success">
+                                Save Target
+                            </button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+                <!-- ---------------------- -->
+                </td>
+                <td>{{p.daily_target}}</td>
+                {% if p.status == False %}
+                                <td><span class="badge badge-pill badge-warning">pending</span></td>
+                {% else %}
+                <td><span class="badge badge-pill badge-success">finish</span></td>
+                {% endif %}
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+
+
+</div>
+
+</div>
+
+</div>
+
+
+<hr>
+
+<div class="card-box mb-30">
+    <div class="pd-20">
+                <h4 class="text-blue h4"><i class="micon dw dw-karate"></i>-Garment Factory</h4>
+        
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-primary">
+
+                <th class="">Line Name</th>
+                <th class="">Style Code</th>
+                <th class="">InputQty</th>
+                <th class="">TargetQty</th>
+                <th>New Order</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in daily_target_view %}
+            <tr class="">
+                <td class="table-plus"><a href="#"><b>{{p.line}}</b></a></td>
+                <td>{{p.style}}</td>
+                <td>{{p.input_qty}}</td>
+                <td>{{p.daily_target}}</td>
+                <td>
+                    *
+                </td>
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock content %}

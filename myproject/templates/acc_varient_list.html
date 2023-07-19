@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Inventory Acc List</h4>
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-success">
+                <th class="">PO#</th>
+                <th class="">Size</th>
+                <th class="">AvaiableQty</th>
+                <th>Request</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in acc %}
+            <tr class="">
+                <td class="table-plus"><a href="#"><b>{{object.accinv}}</b></a></td>
+                <td class="">{{ object.size }}</td>
+                <td>{{object.quantity}}</td>
+                <td>
+                    <a
+                            href="#"
+                            class="btn-primary btn-sm"
+                            data-toggle="modal"
+                            data-target="#Medium-modal{{object.id}}"
+                            type="button"
+                    >Request
+
+                    </a>
+
+                    <div
+									class="modal fade"
+									id="Medium-modal{{object.id}}"
+									tabindex="-1"
+									role="dialog"
+									aria-labelledby="myLargeModalLabel"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myLargeModalLabel">
+													Accessories Request Form
+												</h4>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-hidden="true"
+												>
+													×
+												</button>
+											</div>
+											<form action="{% url 'myapp:AccVarientList' %}" method="post">{% csrf_token %}
+											<div class="modal-body">
+												<div class="form-group row">
+                                        <label class="col-sm-12 col-md-4 col-form-label">Style #{{object.accinv}}/Size:{{object.size}} </label>
+
+                                        <div class="col-sm-12 col-md-12">
+											<input type="text" name="style_po_id" value="{{object.id}}" hidden>
+											<input type="text" name="style_po" value="{{object.accinv}}" hidden>
+											<input type="text" name="size" value="{{object.size}}" hidden>
+                                            <input class="form-control" type="number" placeholder="Enter Request Qty" name="request_qty">
+                                        </div>
+                                    </div>
+											</div>
+											<div class="modal-footer">
+												<button
+													type="button"
+													class="btn btn-secondary"
+													data-dismiss="modal"
+												>
+													Close
+												</button>
+												<button type="submit" class="btn btn-primary">
+													Request
+												</button>
+											</div>
+											</form>
+										</div>
+									</div>
+								</div>
+
+                </td>
+
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Accessories Request List</h4>
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="">
+                <th class="">PO#</th>
+                <th class="">Size</th>
+                <th class="">Qty</th>
+                <th>Status</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for object in accreq %}
+            <tr class="">
+                <td class="table-plus"><a href="#"><b>{{object.style_po}}</b></a></td>
+                <td class="">{{ object.size }}</td>
+                <td>{{object.request_qty}}</td>
+                <td>{{object.request_status}}</td>
+
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock content %}

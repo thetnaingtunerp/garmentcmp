@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--=============================================================-->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4"><i class="micon dw dw-karate"></i>-Order Qty Report</h4>
+
+    </div>
+    <div class="pb-20">
+        <table class="table hover data-table-export nowrap">
+            <thead>
+            <tr class="table-primary">
+
+                <th class="text-center">Buyer Name</th>
+                <th class="text-center">Style Code</th>
+                <th class="text-center">Order Qty</th>
+                <th>CMP</th>
+<!--                <th>Making Charge</th>-->
+<!--                <th>Import/Export</th>-->
+<!--                <th>Box Charge</th>-->
+<!--                <th>Poly Bag</th>-->
+<!--                <th>Sewing</th>-->
+                <th>Date</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in orderqty %}
+            <tr class="">
+                <td class="table-plus text-center"><a href="#"><b>{{p.buyer}}</b></a></td>
+                <td>{{p.style}}</td>
+                <td>{{p.order_qty}}</td>
+                <td>{{p.cmp_amount}}</td>
+<!--                <td>{{p.making_charge}}</td>-->
+<!--                <td>{{p.import_export_charge}}</td>-->
+<!--                <td>{{p.box_charge}}</td>-->
+<!--                <td>{{p.poly_bag}}</td>-->
+<!--                <td>{{p.sewing_thread}}</td>-->
+                <td>{{p.date}}</td>
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

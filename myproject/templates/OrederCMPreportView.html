@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<!--=============================================================-->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4"><i class="micon dw dw-karate"></i>-Order Qty Report</h4>
+
+    </div>
+    <div class="pb-20">
+        <table class="table hover data-table-export">
+            <thead>
+            <tr class="table-primary">
+                <th>Serial Number</th>
+                <th>Register Date</th>
+<!--                <th>MD in Charge</th>-->
+                <th>Vendor</th>
+                <th>End User</th>
+                <th>Style#</th>
+                <th>Item</th>
+                <th>Delivery Date</th>
+                <th>OrderQty</th>
+                <th>CMP</th>
+                <th>CMP Amount</th>
+                <th>CMP condition</th>
+                <th>fabricETA</th>
+                <th>accETA</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in orderqty %}
+            <tr class="">
+                <td class="table-plus text-center"><a href="#"><b>{{p.buyer}}-{{p.date|date:"j-n-Y"}}-0{{p.id}}</b></a></td>
+                <td>{{p.date}}</td>
+                <td>{{p.vendor}}</td>
+                <td>{{p.buyer}}</td>
+                <td>{{p.style}}</td>
+                <td>{{p.item}}</td>
+                <td>
+
+                    <a
+                            href="#"
+
+                    ><strong>{{p.delivery}}</strong>
+                        {% if not p.delivery %}
+                            <i class="text-danger micon dw dw-edit3"></i>
+                        {% endif %}
+                        </a>
+
+                </td>
+                <td>{{p.order_qty}}</td>
+                <td>{{p.cmp}}</td>
+                <td>{{p.cmp_amount}}</td>
+                <td>
+
+                    <a href="{% url 'myapp:EditOrderQtyView' p.id %}" class="" data-color="blue"><strong>{{p.cmp_condition}}</strong></a>
+                </td>
+                <td>{{p.fabricETA}}</td>
+                <td>{{p.accETA}}</td>
+<!--                <td>4</td>-->
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+{% endblock content %}

@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+
+<div class="row clearfix">
+    {% for l in line %}
+    <!-- Large modal -->
+    <div class="col-md-4 col-sm-12 mb-30">
+        <div class="pd-20 card-box height-100-p">
+            <!--                                <h5 class="h4">Large modal</h5>-->
+            <a
+                    href="#"
+                    class="btn-block"
+                    data-toggle="modal"
+                    data-target="#bd-example-modal-lg{{l.id}}"
+                    type="button"
+            >
+                <!--                                    <img src="vendors/images/modal-img1.jpg" alt="modal" />-->
+                <h4><i class="icon-copy dw dw-scissors"></i>{{l.ProductionLine}}</h4>
+            </a>
+            <div
+                    class="modal fade bs-example-modal-lg"
+                    id="bd-example-modal-lg{{l.id}}"
+                    tabindex="-1"
+                    role="dialog"
+                    aria-labelledby="myLargeModalLabel"
+                    aria-hidden="true"
+            >
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myLargeModalLabel">
+                                Addendance
+                            </h4>
+                            <button
+                                    type="button"
+                                    class="close"
+                                    data-dismiss="modal"
+                                    aria-hidden="true"
+                            >
+                                ×
+                            </button>
+                        </div>
+                        <form action="{% url 'myapp:DailyAttendanceView' %}" method="post">{% csrf_token %}
+                        <div class="modal-body">
+                            <h2 class="text-center">{{l.ProductionLine}}</h2>
+                            <input type="text" value="{{l.ProductionLine}}" name="pline" hidden="true">
+                            <br>
+
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Operator</label>
+                                <div class="col-sm-12 col-md-8">
+                                    <input class="form-control" type="number" placeholder="" name="op">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-12 col-md-2 col-form-label">Helper</label>
+                                <div class="col-sm-12 col-md-8">
+                                    <input class="form-control" type="number" placeholder="" name="hp">
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="modal-footer">
+                            <button
+                                    type="button"
+                                    class="btn btn-secondary"
+                                    data-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                Save changes
+                            </button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+
+
+
+
+
+
+
+<!--=============================================================-->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Daily Attendance List</h4>
+
+    </div>
+    <div class="pb-20">
+        <table class="table hover data-table">
+            <thead>
+            <tr class="bg-success">
+                
+                <th>Line</th>
+                <th>Operator</th>
+                <th>Helper</th>
+                <th>Date</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in data %}
+            <tr class="">
+                                
+                <td>{{p.line}}</td>
+                <td>{{p.num_operator}}</td>
+                <td>{{p.num_helper}}</td>
+                <td>{{p.date}}</td>
+                
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+{% endblock content %}

@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<!-- ---------table--------- -->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Daily Production</h4>
+
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-primary">
+
+                <th class="">Line Name</th>
+
+                <th class="">InStock</th>
+                <th class="">TargetQty</th>
+                <th>total output</th>
+                <th>
+                    %
+                </th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in daily_target_view %}
+            <tr class="">
+                <td class="table-plus"><a href="{% url 'myapp:LineDataEntryView' %}?pline={{p.line}}"
+                                          class="text-primary font-weight-bold d-block"><strong>{{p.line}}</strong></a>
+                </td>
+
+                <td>{{p.stock}}</td>
+                <td>{{p.daily_target}}</td>
+                <td>
+                    {{p.t_total_output_qty}}
+
+
+                </td>
+                <td>
+
+                    <script>document.write({{p.t_total_output_qty}}/{{p.sum}}*100);</script>
+                    %
+
+
+                </td>
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
+</div>
+
+
+{% endblock content %}

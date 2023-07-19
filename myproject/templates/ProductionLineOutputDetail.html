@@ -1,0 +1,405 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <!-- Basic Page Info -->
+    <meta charset="utf-8"/>
+    <title>{{title}}</title>
+
+    <!-- Auto Refresh -->
+<!--    <script>-->
+<!--        function autoRefresh() {-->
+<!--            window.location = window.location.href;-->
+<!--        }-->
+<!--        setInterval('autoRefresh()', 5000);-->
+<!--    </script>-->
+
+    <!-- Site favicon -->
+    <link
+            rel="apple-touch-icon"
+            sizes="180x180"
+            href="{% static 'vendors/images/applogo.png' %}"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="{% static 'vendors/images/applogo.png' %}"
+    />
+    <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="{% static 'vendors/images/applogo.png' %}"
+    />
+
+    <!-- Mobile Specific Metas -->
+    <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=1"
+    />
+
+    <!-- Google Font -->
+    <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+            rel="stylesheet"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/core.css' %}"/>
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'vendors/styles/icon-font.min.css' %}"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'src/plugins/datatables/css/dataTables.bootstrap4.min.css' %}"
+    />
+    <link
+            rel="stylesheet"
+            type="text/css"
+            href="{% static 'src/plugins/datatables/css/responsive.bootstrap4.min.css' %}"
+    />
+    <link rel="stylesheet" type="text/css" href="{% static 'vendors/styles/style.css' %}"/>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-GBZ3SGGX85"
+    ></script>
+    <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag("js", new Date());
+
+            gtag("config", "G-GBZ3SGGX85");
+
+    </script>
+    <!-- Google Tag Manager -->
+    <script>
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || [];
+                w[l].push({ "gtm.start": new Date().getTime(), event: "gtm.js" });
+                var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s),
+                    dl = l != "dataLayer" ? "&l=" + l : "";
+                j.async = true;
+                j.src = "https://www.googletagmanager.com/gtm.js?id=" + i + dl;
+                f.parentNode.insertBefore(j, f);
+            })(window, document, "script", "dataLayer", "GTM-NXZMQSS");
+
+    </script>
+    <!-- End Google Tag Manager -->
+</head>
+<body>
+
+
+
+<section>
+
+<div class="card-box mb-30 row">
+    
+    <div class="pb-20 col-md-8">
+        <table class="table stripe text-right">
+            <thead>
+            
+            </thead>
+            <tbody>
+            
+            <tr class="">
+                <th colspan="4" class="text-center h1" >
+                    <strong>{{pline}}</strong>
+
+                </th>
+            </tr>
+
+            
+            <tr class="">
+                <td><h1 class="">Shift</h1></td>
+                    <td><h1 class="">Output/Target</h1></td>
+                    <td><h1 class="">Shift</h1></td>
+                    <td><h1 class="">Output/Target</h1></td>
+                    
+            </tr>
+
+            {% for p in daily_target_view %}
+            
+            <tr>
+                <td><h4>8:30 AM</h4></td>
+               
+                <td><h1>{{p.t_s1}}/{{shift}}</h1></td>
+                <td><h4>2:00 PM</h4></td>
+                
+                <td>
+                    <h1>{{p.t_s6}}/{{shift}}</h1>     
+                
+                    
+                </td>
+                </tr>
+                <tr>
+                    <td><h4>9:30 AM</h4></td>
+                    <td><h1>{{p.t_s2}}/{{shift}}</h1></td>
+                    <td><h4>3:00 PM</h4></td>
+                    <td><h1>{{p.t_s7}}/{{shift}}</h1></td>
+
+                </tr>
+                <tr>
+                    <td><h4>10:30 AM</h4></td>
+                    <td><h1>{{p.t_s3}}/{{shift}}</h1></td>
+                    <td><h4>4:00 PM</h4></td>
+                    <td><h1>{{p.t_s8}}/{{shift}}</h1></td>
+
+                </tr>
+                <tr>
+                    <td><h4>11:30 AM</h4></td>
+                    <td><h1>{{p.t_s4}}/{{shift}}</h1></td>
+                    <td><h4>5:00 PM</h4></td>
+                    <td><h1>{{p.t_s9}}/{{shift}}</h1></td>
+
+                </tr>
+                <tr>
+                    <td class=""><h4>1:00 PM</h4></td>
+                    <td><h1>{{p.t_s5}}/{{shift}}</h1></td>
+                    <td><h4>6:00 PM</h4></td>
+                    <td><h1>{{p.t_s10}}/{{shift}}</h1></td>
+
+                </tr>
+            
+            <tr>
+                    <td class=""><h4></h4></td>
+                    <td><h1></h1></td>
+                    <td class="bg-warning"><h4>TARGET</h4></td>
+                    <td class="bg-warning"><h1>{{p.t_total_output_qty}}/{{dt}}</h1></td>
+
+                </tr>
+                {% endfor %}
+            
+
+            </tbody>
+        </table>
+    </div>
+    <div class="col-md-4">
+        <table class="table stripe">
+            <tr class="">
+                <th colspan="3" class="text-center h1" id="">
+                    <span id="gettime"></span>
+                    
+
+                </th>
+            </tr>
+
+            <tr class="" bgcolor="">
+                <th class="h2">Rank</th>
+                <th colspan="" class="text-center h2">
+                    Line Name
+                </th>
+                <th colspan="" class="text-center h2">
+                    Total %
+                </th>
+            </tr>
+            <tr class="" bgcolor="#0bf707">
+                <th class="h2">1</th>
+                <th colspan="" class="text-center h2" id="rank1">
+<!--                    <strong>{{i.line}}</strong>-->
+                </th>
+                <th colspan="" class="text-center h2" id="per1">
+                    <strong>
+<!--                        <script>document.write({{i.t_total_output_qty}}/{{i.sum}}*100);</script>%-->
+                    </strong>
+                </th>
+            </tr>
+
+            <tr class="" bgcolor= "">
+                <th class="h2">2</th>
+                <th colspan="" class="text-center h2" id="rank2">
+                </th>
+                <th colspan="" class="text-center h2" id="per2">
+
+                </th>
+            </tr>
+
+            <tr class="">
+                <th class="h2">3</th>
+                <th colspan="" class="text-center h2" id="rank3">
+                </th>
+                <th colspan="" class="text-center h2" id="per3">
+
+                </th>
+            </tr>
+            <tr class="">
+                <th class="h2">4</th>
+                <th colspan="" class="text-center h2" id="rank4">
+                </th>
+                <th colspan="" class="text-center h2" id="per4">
+
+                </th>
+            </tr>
+            <tr class="">
+                <th class="h2">5</th>
+                <th colspan="" class="text-center h2" id="rank5">
+                </th>
+                <th colspan="" class="text-center h2" id="per5">
+
+                </th>
+            </tr>
+            <tr class="" bgcolor= "red">
+                <th class="h2">6</th>
+                <th colspan="" class="text-center h2" id="rank6">
+                </th>
+                <th colspan="" class="text-center h2" id="per6">
+
+                </th>
+            </tr>
+            
+        </table>
+    </div>
+
+</div>
+
+</section>
+
+
+
+<!-- rank start -->
+<script>
+
+
+{% for p1 in line1 %}
+a1 = {{p1.t_total_output_qty}}/{{p1.sum}}*100;
+{% endfor %}
+
+
+{% for p2 in line2 %}
+a2 = {{p2.t_total_output_qty}}/{{p2.sum}}*100;
+{% endfor %}
+
+
+{% for p3 in line3 %}
+a3 = {{p3.t_total_output_qty}}/{{p3.sum}}*100;
+{% endfor %}
+
+
+{% for p3 in line4 %}
+var a4 = {{p3.t_total_output_qty}}/{{p3.sum}}*100;
+{% endfor %}
+
+
+{% for p3 in line5 %}
+var a5 = {{p3.t_total_output_qty}}/{{p3.sum}}*100;
+{% endfor %}
+
+
+{% for p3 in line6 %}
+var a6 = {{p3.t_total_output_qty}}/{{p3.sum}}*100;
+{% endfor %}
+
+const line = [
+{% for p1 in line1 %}
+  {name:"{{p1.line}}", per:a1},
+{% endfor %}
+
+{% for p1 in line2 %}
+  {name:"{{p1.line}}", per:a2},
+{% endfor %}
+
+{% for p1 in line3 %}
+  {name:"{{p1.line}}", per:a3},
+{% endfor %}
+
+{% for p1 in line4 %}
+  {name:"{{p1.line}}", per:a4},
+{% endfor %}
+
+{% for p1 in line5 %}
+  {name:"{{p1.line}}", per:a5},
+{% endfor %}
+
+{% for p1 in line6 %}
+  {name:"{{p1.line}}", per:a6},
+{% endfor %}
+
+
+];
+displayCars();
+
+line.sort(function(a, b){return a.per - b.per});
+displayCars();
+
+function displayCars() {
+  document.getElementById("rank1").innerHTML = line[5].name;
+  document.getElementById("per1").innerHTML = line[5].per.toFixed(2);
+  document.getElementById("rank2").innerHTML = line[4].name;
+  document.getElementById("per2").innerHTML = line[4].per.toFixed(2);
+  document.getElementById("rank3").innerHTML =line[3].name;
+  document.getElementById("per3").innerHTML = line[3].per.toFixed(2);
+  document.getElementById("rank4").innerHTML =line[2].name;
+  document.getElementById("per4").innerHTML = line[2].per.toFixed(2);
+  document.getElementById("rank5").innerHTML =line[1].name;
+  document.getElementById("per5").innerHTML = line[1].per.toFixed(2);
+  document.getElementById("rank6").innerHTML =line[0].name;
+  document.getElementById("per6").innerHTML = line[0].per.toFixed(2);
+
+}
+
+//get Time
+const getTimeAMPMFormat = (date) => {
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+  hours = hours % 12;
+  hours = hours ? hours : 12; // the hour '0' should be '12'
+  hours = hours < 10 ? '0' + hours : hours;
+  // appending zero in the start if hours less than 10
+  minutes = minutes < 10 ? '0' + minutes : minutes;
+  return hours + ':' + minutes + ' ' + ampm;
+};
+document.getElementById("gettime").innerHTML = getTimeAMPMFormat(new Date);
+//console.log(getTimeAMPMFormat(new Date));
+
+
+
+</script>
+<!-- rank end -->
+<!-- js -->
+<script src="{% static 'vendors/scripts/core.js' %}"></script>
+<script src="{% static 'vendors/scripts/script.min.js' %}"></script>
+<script src="{% static 'vendors/scripts/process.js' %}"></script>
+<script src="{% static 'vendors/scripts/layout-settings.js' %}"></script>
+<script src="{% static 'src/plugins/datatables/js/jquery.dataTables.min.js' %}"></script>
+<script src="{% static 'src/plugins/datatables/js/dataTables.bootstrap4.min.js' %}"></script>
+<script src="{% static 'src/plugins/datatables/js/dataTables.responsive.min.js' %}"></script>
+<script src="{% static 'src/plugins/datatables/js/responsive.bootstrap4.min.js' %}"></script>
+<!-- buttons for Export datatable -->
+<script src="{% static 'src/plugins/datatables/js/dataTables.buttons.min.js' %}"></script>
+<script src="{% static 'src/plugins/datatables/js/buttons.bootstrap4.min.js' %}"></script>
+<script src="{% static 'src/plugins/datatables/js/buttons.print.min.js' %}"></script>
+<script src="{% static 'src/plugins/datatables/js/buttons.html5.min.js' %}"></script>
+<script src="{% static 'src/plugins/datatables/js/buttons.flash.min.js' %}"></script>
+<script src="{% static 'src/plugins/datatables/js/pdfmake.min.js' %}"></script>
+<script src="{% static 'src/plugins/datatables/js/vfs_fonts.js' %}"></script>
+<!-- Datatable Setting js -->
+<script src="{% static 'vendors/scripts/datatable-setting.js' %}"></script>
+<!-- Google Tag Manager (noscript) -->
+<!--        <script src="{% static 'src/plugins/apexcharts/apexcharts.min.js' %}"></script>-->
+<!--        <script src="{% static 'vendors/scripts/apexcharts-setting.js' %}"></script>-->
+<!--<script src="{% static 'vendors/scripts/goog.js' %}"></script>-->
+
+<script src="https://www.gstatic.com/charts/loader.js"></script>
+
+
+<noscript
+>
+    <iframe
+            src="https://www.googletagmanager.com/ns.html?id=GTM-NXZMQSS"
+            height="0"
+            width="0"
+            style="display: none; visibility: hidden"
+    ></iframe
+    >
+</noscript>
+<!-- End Google Tag Manager (noscript) -->
+</body>
+</html>

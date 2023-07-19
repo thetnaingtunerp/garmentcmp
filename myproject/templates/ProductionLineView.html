@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="page-header">
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <div class="title">
+                <h5>New Production Line</h5>
+
+            </div>
+            <hr>
+
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6 col-sm-12">
+            <form action="{% url 'myapp:ProductionLineView' %}" method="post">{% csrf_token %}
+                <div class="form-group row">
+                    <label class="col-sm-12 col-md-2 col-form-label">Production Line</label>
+                    <div class="col-sm-12 col-md-10">
+                        <input class="form-control" type="text" placeholder="" name="line">
+                    </div>
+                </div>
+
+
+                {% if message %}
+                <li class="text-danger">{{message}}</li>
+
+                {% endif %}
+                {% if success %}
+                <div class="text-success" role="">
+                    {{success}}
+                </div>
+                {% endif %}
+
+                <input type="submit" value="Add Production Line" class="btn btn-primary">
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<!--=============================================================-->
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Production Line List</h4>
+
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-success">
+
+                <th class="text-center">#</th>
+                <th class="text-center">ProductionLine</th>
+                <!--                <th class="text-center">More</th>-->
+                                <th>Daily Target</th>
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in line %}
+            <tr class="">
+                <td class="table-plus text-center"><a href="#"><b>{{p.id}}</b></a></td>
+                <td class="text-center">{{p.ProductionLine}}</td>
+                                <td>{{p.daily_target}}</td>
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<div class="row">
+        <div class="col-md-6 col-sm-12">
+            <form action="" method="post" enctype="multipart/form-data">{% csrf_token %}
+
+
+{{form.as_p}}
+
+
+                <input type="submit" value="Save" class="btn btn-outline-primary">
+
+
+            </form>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+<style>
+    label{
+    color:black;
+    font-size: 20px;
+    font-weight: bold;
+    }
+    #id_style{
+    color:black;
+    font-size: 30px;
+    font-weight: bold;
+<!--    background-color: ;-->
+    }
+</style>
+
+{% endblock content %}

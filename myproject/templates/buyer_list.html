@@ -1,0 +1,143 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if message %}
+<div class="text-danger" role="">
+    {{message}}
+</div>
+{% endif %}
+{% if success %}
+<div class="text-success" role="">
+    {{success}}
+</div>
+{% endif %}
+<!--=============================================================-->
+<div class="card-box mb-30">
+    <div class="pd-20">
+         <a
+                        href="#"
+                        class="btn btn-outline-primary"
+                        data-toggle="modal"
+                        data-target="#Medium-modal"
+                        type="button"
+                >
+                    <i class="micon dw dw-add"> Create Buyer</i>
+                </a>
+                <div
+                        class="modal fade"
+                        id="Medium-modal"
+                        tabindex="-1"
+                        role="dialog"
+                        aria-labelledby="myLargeModalLabel"
+                        aria-hidden="true"
+                >
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myLargeModalLabel">
+                                    Large modal
+                                </h4>
+                                <button
+                                        type="button"
+                                        class="close"
+                                        data-dismiss="modal"
+                                        aria-hidden="true"
+                                >
+                                    ×
+                                </button>
+                            </div>
+                            <form action="{% url 'myapp:BuyerView' %}" method="post">{% csrf_token %}
+                                <div class="modal-body">
+                                    <p>
+
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Vendor Name</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control" type="text" placeholder="" name="vendor_name">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Buyer Name</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control" type="text" placeholder="" name="buyer_name">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group row">
+                                        <label class="col-sm-12 col-md-2 col-form-label">Address</label>
+                                        <div class="col-sm-12 col-md-10">
+                                            <input class="form-control" type="text" placeholder="" name="address">
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="input-group mb-0">
+
+                                                <!--																<input class="btn btn-success btn-lg btn-block" type="submit" value="Add Buyer">-->
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button
+                                            type="button"
+                                            class="btn btn-secondary"
+                                            data-dismiss="modal"
+                                    >
+                                        Close
+                                    </button>
+                                    <input class="btn btn-success" type="submit" value="Add Buyer">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+        <!--        <h4 class="text-blue h4">Buyer List</h4>-->
+
+        <!--        Modals-->
+
+        <!--=====================================-->
+        <!-- Medium modal -->
+
+        <!--        ==========================-->
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-primary">
+
+                <th class="text-center">Vendor Name</th>
+                <th class="text-center">Buyer Name</th>
+                <th class="text-center">Address</th>
+                <!--                <th class="text-center">More</th>-->
+                <!--                <th>Vou</th>-->
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in buyer %}
+            <tr class="">
+                <td class="table-plus text-center"><a href="#"><b>{{p.Vendor}}</b></a></td>
+                <td>{{p.BuyerName}}</td>
+                <td>{{p.Address}}</td>
+                <!--                <td>edit</td>-->
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}
