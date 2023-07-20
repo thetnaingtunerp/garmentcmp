@@ -9,7 +9,7 @@ from django.views.generic import TemplateView, View, CreateView, DetailView,Form
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.core.paginator import Paginator
-
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from .forms import *
 from .models import *
 
@@ -664,6 +664,18 @@ class WarehouseMgrView(View):
     def get(self,request):
         acc = AccVariant.objects.all()
         accreq = AccessoriesRequestToWh.objects.filter(request_status='requested')
+        # user_list = User.objects.all()
+        page = request.GET.get('page', 1)
+
+        paginator = Paginator(accreq, 5)
+        try:
+            accreq = paginator.page(page)
+        except PageNotAnInteger:
+            accreq = paginator.page(1)
+        except EmptyPage:
+            accreq = paginator.page(paginator.num_pages)
+
+        # return render(request, 'core/user_list.html', {'users': users})
         context = {'acc': acc, 'accreq': accreq}
         return render(request, 'WarehouseMgrView.html', context)
 
