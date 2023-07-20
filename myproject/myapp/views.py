@@ -658,3 +658,12 @@ class AccVarientList(View):
         )
         accreq.save()
         return redirect('myapp:AccVarientList')
+
+
+class WarehouseMgrView(View):
+    def get(self,request):
+        acc = AccVariant.objects.all()
+        accreq = AccessoriesRequestToWh.objects.filter(request_status='requested')
+        context = {'acc': acc, 'accreq': accreq}
+        return render(request, 'WarehouseMgrView.html', context)
+

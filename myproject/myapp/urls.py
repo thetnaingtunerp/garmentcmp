@@ -36,5 +36,6 @@ urlpatterns = [
     path('update/<int:pk>/', ProductUpdate.as_view(), name='update_product'),
     path('delete-image/<int:pk>/', delete_image, name='delete_image'),
     path('delete-variant/<int:pk>/', delete_variant, name='delete_variant'),
+    path('WarehouseMgrView/', WarehouseMgrView.as_view(), name='WarehouseMgrView'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
