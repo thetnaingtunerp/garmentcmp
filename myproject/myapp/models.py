@@ -190,6 +190,7 @@ class AccessoriesRequestToWh(models.Model):
     request_qty = models.IntegerField(default=0)
     status = models.CharField(max_length=100)
     request_by = models.CharField(max_length=100, blank=True, null=True)
+    request_line = models.CharField(max_length=100, blank=True, null=True)
     accept_by = models.CharField(max_length=100, blank=True, null=True)
     request_status = models.CharField(max_length=100)
     request_date = models.DateField(blank=True, null=True)
