@@ -198,5 +198,13 @@ class AccessoriesRequestToWh(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class WarehouseToProductionHistory(models.Model):
+    style_po_id = models.CharField(max_length=100)
+    style_po = models.CharField(max_length=100)
+    size = models.CharField(max_length=100)
+    handover_quantity = models.PositiveIntegerField(default=0)
+    request_qty = models.IntegerField(default=0)
+    request_by = models.CharField(max_length=100)
+    request_line = models.CharField(max_length=100)
+    handover_by = models.CharField(max_length=100)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

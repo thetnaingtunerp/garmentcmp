@@ -664,8 +664,9 @@ class WarehouseMgrView(View):
     def get(self,request):
         acc = AccVariant.objects.all()
         accreq = AccessoriesRequestToWh.objects.filter(request_status='requested')
+        approved_req = AccessoriesRequestToWh.objects.filter(request_status='approved')
 
-        context = {'acc': acc, 'accreq': accreq}
+        context = {'acc': acc, 'accreq': accreq, 'approved_req':approved_req}
         return render(request, 'WarehouseMgrView.html', context)
 
 
