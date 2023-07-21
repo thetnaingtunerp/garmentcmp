@@ -76,32 +76,115 @@
     </div>
 </div>
 
+
+
+
+
+
 <div class="row pb-10">
-    <div class="col-lg-8 col-md-6 mb-20">
+    <div class="col-lg-12 col-md-12 mb-20">
         <div class="card-box height-100-p pd-20 min-height-200px">
             <div class="d-flex justify-content-between pb-10">
-                <div class="h5 mb-0">Accessories</div>
+                <div class="h5 mb-0">Accessories Request</div>
 
             </div>
 
             <div class="user-list">
-
-                <table class="table table-bordered">
+                <table class="data-table table stripe hover nowrap">
   <thead>
     <tr>
-      <th>Username</th>
-      <th>First name</th>
-      <th>Email</th>
-		<th>detail</th>
+      <th>Style Code</th>
+      <th>Size</th>
+      <th>RequestQty</th>
+		<th>RequestBy</th>
+        <th>Detail</th>
     </tr>
   </thead>
   <tbody>
     {% for i in accreq %}
       <tr>
-        <td>w</td>
-        <td>e</td>
-        <td>q</td>
-		  <td>3</td>
+        <td>{{i.style_po}}</td>
+        <td>{{i.size}}</td>
+        <td>{{i.request_qty}}</td>
+		  <td>{{i.request_by}}</td>
+          <td>
+              <a href="{% url 'myapp:AccRequestStatusChange' i.id %}" class="badge bg-success text-light">accept</a>
+              <a
+                            href="#"
+                            class="badge bg-primary text-light"
+                            data-toggle="modal"
+                            data-target="#Medium-modal{{i.id}}"
+                            type="button"
+                    >view
+
+                    </a>
+
+                    <div
+									class="modal fade"
+									id="Medium-modal{{i.id}}"
+									tabindex="-1"
+									role="dialog"
+									aria-labelledby="myLargeModalLabel"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myLargeModalLabel">
+													Accessories Request Form
+												</h4>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-hidden="true"
+												>
+													×
+												</button>
+											</div>
+
+											<div class="modal-body">
+												<div class="form-group row alert alert-primary">
+                                        <label class="col-sm-12 col-md-6 col-form-label">Style # </label>
+                                        <label class="col-sm-12 col-md-6 col-form-label">{{i.style_po}} </label>
+
+                                                </div>
+                                                <div class="form-group row alert alert-primary">
+                                        <label class="col-sm-12 col-md-6 col-form-label">Size </label>
+                                        <label class="col-sm-12 col-md-6 col-form-label">{{i.size}} </label>
+                                                </div>
+                                                <div class="form-group row alert alert-primary">
+                                        <label class="col-sm-12 col-md-6 col-form-label">Request Qty </label>
+                                        <label class="col-sm-12 col-md-6 col-form-label">{{i.request_qty}} </label>
+                                                </div>
+                                                <div class="form-group row alert alert-primary">
+                                        <label class="col-sm-12 col-md-6 col-form-label">Request By </label>
+                                        <label class="col-sm-12 col-md-6 col-form-label">{{i.request_by}} </label>
+                                                </div>
+                                                <div class="form-group row alert alert-primary">
+                                        <label class="col-sm-12 col-md-6 col-form-label">Request Line </label>
+                                        <label class="col-sm-12 col-md-6 col-form-label">{{i.request_line}} </label>
+                                                </div>
+                                                <div class="form-group row alert alert-primary">
+                                        <label class="col-sm-12 col-md-6 col-form-label">Request Date </label>
+                                        <label class="col-sm-12 col-md-6 col-form-label">{{i.request_date}} </label>
+                                                </div>
+											</div>
+											<div class="modal-footer">
+												<button
+													type="button"
+													class="btn btn-secondary"
+													data-dismiss="modal"
+												>
+													Close
+												</button>
+
+											</div>
+
+										</div>
+									</div>
+								</div>
+          </td>
       </tr>
     {% endfor %}
   </tbody>
@@ -110,80 +193,11 @@
 
 
 
-                    {% if accreq.has_other_pages %}
-                    <ul class="pagination">
-                        {% if accreq.has_previous %}
-                        <li><a href="?page={{ accreq.previous_page_number }}">&laquo;</a></li>
-                        {% else %}
-                        <li class="disabled"><span>&laquo;</span></li>
-                        {% endif %}
-                        {% for i in accreq.paginator.page_range %}
-                        {% if accreq.number == i %}
-                        <li class="active"><span>{{ i }} <span class="sr-only">(current)</span></span></li>
-                        {% else %}
-                        <li><a href="?page={{ i }}">{{ i }}</a></li>
-                        {% endif %}
-                        {% endfor %}
-                        {% if accreq.has_next %}
-                        <li><a href="?page={{ accreq.next_page_number }}">&raquo;</a></li>
-                        {% else %}
-                        <li class="disabled"><span>&raquo;</span></li>
-                        {% endif %}
-                    </ul>
-                    {% endif %}
-
-
-
             </div>
         </div>
     </div>
 
-    <div class="col-md-4 mb-20">
-        <div
-                class="card-box min-height-200px pd-20 mb-20"
-                data-bgcolor="#455a64"
-        >
-            <div class="d-flex justify-content-between pb-20 text-white">
-                <div class="icon h1 text-white">
-                    <i class="fa fa-calendar" aria-hidden="true"></i>
-                    <!-- <i class="icon-copy fa fa-stethoscope" aria-hidden="true"></i> -->
-                </div>
-                <div class="font-14 text-right">
-                    <div><i class="icon-copy ion-arrow-up-c"></i> 2.69%</div>
-                    <div class="font-12">Since last month</div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between align-items-end">
-                <div class="text-white">
-                    <div class="font-14">Appointment</div>
-                    <div class="font-24 weight-500">1865</div>
-                </div>
-                <div class="max-width-150">
-                    <div id="appointment-chart"></div>
-                </div>
-            </div>
-        </div>
-        <div class="card-box min-height-200px pd-20" data-bgcolor="#265ed7">
-            <div class="d-flex justify-content-between pb-20 text-white">
-                <div class="icon h1 text-white">
-                    <i class="fa fa-stethoscope" aria-hidden="true"></i>
-                </div>
-                <div class="font-14 text-right">
-                    <div><i class="icon-copy ion-arrow-down-c"></i> 3.69%</div>
-                    <div class="font-12">Since last month</div>
-                </div>
-            </div>
-            <div class="d-flex justify-content-between align-items-end">
-                <div class="text-white">
-                    <div class="font-14">Surgery</div>
-                    <div class="font-24 weight-500">250</div>
-                </div>
-                <div class="max-width-150">
-                    <div id="surgery-chart"></div>
-                </div>
-            </div>
-        </div>
-    </div>
+
 </div>
 
 

@@ -37,5 +37,6 @@ urlpatterns = [
     path('delete-image/<int:pk>/', delete_image, name='delete_image'),
     path('delete-variant/<int:pk>/', delete_variant, name='delete_variant'),
     path('WarehouseMgrView/', WarehouseMgrView.as_view(), name='WarehouseMgrView'),
+    path('AccRequestStatusChange/<int:pk>/', AccRequestStatusChange.as_view(), name='AccRequestStatusChange'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
