@@ -679,4 +679,6 @@ class AccRequestStatusChange(View):
         return redirect('myapp:WarehouseMgrView')
 
 
-
+class WH_to_Production_Acc(View):
+    def get(self,request):
+        return render(request, 'WH_to_Production_Acc.html')
