@@ -27,8 +27,12 @@ class DailyProductionLineMenPowerAdmin(admin.ModelAdmin):
 admin.site.register(DailyProductionLineMenPower,DailyProductionLineMenPowerAdmin)
 
 class AccVariantAdmin(admin.ModelAdmin):
-    list_display = ('accinv','size','quantity','remark')
+    list_display = ('id','accinv','size','quantity','remark')
 admin.site.register(AccVariant,AccVariantAdmin)
+
+class WarehouseToProductionHistoryAdmin(admin.ModelAdmin):
+    list_display = ('style_po_id','style_po','size','handover_quantity')
+admin.site.register(WarehouseToProductionHistory,WarehouseToProductionHistoryAdmin)
 
 admin.site.register(OrderQty)
 

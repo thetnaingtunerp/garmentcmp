@@ -206,5 +206,7 @@ class WarehouseToProductionHistory(models.Model):
     request_by = models.CharField(max_length=100)
     request_line = models.CharField(max_length=100)
     handover_by = models.CharField(max_length=100)
+    operator = models.CharField(max_length=100)
+    remark = models.CharField(max_length=100, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

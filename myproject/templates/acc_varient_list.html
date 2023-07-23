@@ -110,6 +110,7 @@
                 <th class="">PO#</th>
                 <th class="">Size</th>
                 <th class="">Qty</th>
+                <th>Date</th>
                 <th>Status</th>
 
             </tr>
@@ -120,8 +121,10 @@
                 <td class="table-plus"><a href="#"><b>{{object.style_po}}</b></a></td>
                 <td class="">{{ object.size }}</td>
                 <td>{{object.request_qty}}</td>
-                <td>{{object.request_status}}</td>
-
+                <td>{{object.request_date}}</td>
+                <td>
+                    {{object.request_status}}
+                </td>
             </tr>
             {% endfor %}
             </tbody>

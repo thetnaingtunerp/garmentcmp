@@ -636,7 +636,7 @@ def delete_variant(request, pk):
 class AccVarientList(View):
     def get(self,request):
         acc = AccVariant.objects.all()
-        accreq = AccessoriesRequestToWh.objects.filter(request_by=request.user,request_status='requested')
+        accreq = AccessoriesRequestToWh.objects.filter(request_by=request.user)
         context = {'acc': acc,'accreq':accreq}
         return render(request, 'acc_varient_list.html', context)
 
@@ -681,4 +681,41 @@ class AccRequestStatusChange(View):
 
 class WH_to_Production_Acc(View):
     def get(self,request):
-        return render(request, 'WH_to_Production_Acc.html')
+        AccV = AccVariant.objects.all()
+        approved_req = AccessoriesRequestToWh.objects.filter(request_status='approved')
+        wh_to_pro = WarehouseToProductionHistory.objects.all()
+        context={'AccV':AccV,'approved_req':approved_req,'wh_to_pro':wh_to_pro}
+        return render(request, 'WH_to_Production_Acc.html',context)
+
+    def post(self,request):
+        style_po_id = request.POST.get('style_po_id')
+        style_po = request.POST.get('style_po')
+        size = request.POST.get('size')
+        request_qty = request.POST.get('request_qty')
+        request_by= request.POST.get('request_by')
+        request_line= request.POST.get('request_line')
+        handover_quantity = request.POST.get('handover_quantity')
+        operator = request.POST.get('operator')
+        remark = request.POST.get('remark')
+        r_id = request.POST.get('r_id')
+
+        get_id = AccVariant.objects.get(id=style_po_id)
+        get_acc_qty = get_id.quantity
+        balance = int(get_acc_qty)-int(handover_quantity)
+        acc_update = AccVariant.objects.filter(id=style_po_id).update(quantity=balance)
+        rid = AccessoriesRequestToWh.objects.filter(id = r_id).update(request_status='completed')
+        his = WarehouseToProductionHistory(
+            style_po_id=style_po_id,
+            style_po=style_po,
+            size=size,
+            request_qty=request_qty,
+            request_by=request_by,
+            request_line=request_line,
+            handover_quantity=handover_quantity,
+            operator=operator,
+            handover_by=request.user,
+            remark = remark,
+
+        )
+        his.save()
+        return redirect('myapp:WH_to_Production_Acc')
