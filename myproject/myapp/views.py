@@ -15,7 +15,7 @@ from .models import *
 
 class Test(View):
     def get(self,request):
-        message_data='TheNaing'
+        message_data='TheNaings'
         context = {'message_data':message_data}
         return render(request, 'home.html', context)
 
