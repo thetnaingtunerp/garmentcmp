@@ -138,6 +138,9 @@ class FabricInventory(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+    def __str__(self):
+        self.po_style_no
+
 class AccInventoy(models.Model):
     supplier_name = models.CharField(max_length=200)
     buyer_name = models.CharField(max_length=200)
