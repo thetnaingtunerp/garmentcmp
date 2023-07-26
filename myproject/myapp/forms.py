@@ -86,7 +86,55 @@ ImageFormSet = inlineformset_factory(
 )
 
 
+class FabricInventoyForm(forms.ModelForm):
 
+    class Meta:
+        model = FabricInventoy
+        fields = ['supplier_name','buyer_name','po_style_no','receive_qty','receive_date','warehouse']
+        widgets = {
+            'supplier_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'buyer_name': forms.TextInput(attrs={'class': 'form-control'}),
+            'po_style_no': forms.TextInput(attrs={'class': 'form-control'}),
+            'receive_qty': forms.NumberInput(attrs={'class': 'form-control'}),
+            
+            'warehouse': forms.Select(attrs={'class': 'form-control'}),
+            'receive_date': forms.DateInput(attrs={'class': 'form-control', 'type':'date'}),
+
+
+        }
+
+class FabricImageForm(forms.ModelForm):
+
+    class Meta:
+        model = FabricImage
+        fields = '__all__'
+
+
+class FabricCompositionForm(forms.ModelForm):
+
+    class Meta:
+        model = FabricComposition
+        fields = ['fabric_construction','fabric_width','fabric_composition','color','receive_qty','remark']
+        widgets = {
+            'fabric_construction': forms.TextInput(attrs={'class': 'form-control'}),
+            'receive_qty': forms.NumberInput(attrs={'class': 'form-control'}),
+            'remark': forms.TextInput(attrs={'class': 'form-control'}),
+
+        }
+
+
+
+
+FabricCompositionFormSet = inlineformset_factory(
+    FabricInventoy, FabricComposition, form=FabricCompositionForm,
+    extra=1, can_delete=True,
+    can_delete_extra=True
+)
+FabricImageFormSet = inlineformset_factory(
+    FabricInventoy, FabricImage, form=FabricImageForm,
+    extra=1, can_delete=True,
+    can_delete_extra=True
+)
 
 
 

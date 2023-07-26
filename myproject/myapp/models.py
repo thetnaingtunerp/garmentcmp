@@ -214,3 +214,43 @@ class WarehouseToProductionHistory(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
+
+class FabricInventoy(models.Model):
+    supplier_name = models.CharField(max_length=200,blank=True, null=True)
+    buyer_name = models.CharField(max_length=200,blank=True, null=True)
+    po_style_no = models.CharField(max_length=200,blank=True, null=True)
+    receive_qty = models.PositiveIntegerField(default=0)
+    warehouse = models.ForeignKey(WareHouse, on_delete=models.CASCADE, null=True)
+    receive_date = models.DateField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.po_style_no
+
+
+class FabricImage(models.Model):
+    accinv = models.ForeignKey(
+        FabricInventoy, on_delete=models.CASCADE, null=True
+    )
+    image = models.ImageField(blank=True, upload_to='images')
+
+    def __str__(self):
+        return self.accinv.po_style_no
+    
+
+class FabricComposition(models.Model):
+    accinv = models.ForeignKey(
+        FabricInventoy, on_delete=models.CASCADE, null=True
+    )
+    fabric_construction = models.CharField(max_length=200, blank=True, null=True)
+    fabric_width = models.CharField(max_length=200, blank=True, null=True)
+    fabric_composition = models.CharField(max_length=200, blank=True, null=True)
+    color = models.CharField(max_length=200, blank=True, null=True)
+    receive_qty = models.PositiveIntegerField(default=0)
+    remark = models.CharField(max_length=200, blank=True,null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.fabric_composition
