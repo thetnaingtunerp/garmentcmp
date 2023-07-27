@@ -34,6 +34,18 @@ class WarehouseToProductionHistoryAdmin(admin.ModelAdmin):
     list_display = ('style_po_id','style_po','size','handover_quantity')
 admin.site.register(WarehouseToProductionHistory,WarehouseToProductionHistoryAdmin)
 
+
+
+class FabricInventoyAdmin(admin.ModelAdmin):
+    list_display = ('id','supplier_name')
+admin.site.register(FabricInventoy,FabricInventoyAdmin)
+
+class FabricCompositionAdmin(admin.ModelAdmin):
+    list_display = ('id','fabric_construction','fabric_width')
+admin.site.register(FabricComposition,FabricCompositionAdmin)
+
+
+
 admin.site.register(OrderQty)
 
 admin.site.register(AccInventoy)

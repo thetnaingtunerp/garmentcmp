@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Inventory Fabric Invoice List</h4>
+
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-success">
+
+                <th class="">Supplier</th>
+                <th class="">Buyer</th>
+                                <th class="">PO</th>
+                                <th>Receive Qty</th>
+                <th class="">Edit</th>
+                <th class="">Warehouse</th>
+
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for a in fab_inv %}
+            <tr class="">
+                <td class="table-plus"><a href="#"><b>{{a.supplier_name}}</b></a></td>
+                <td class="">{{ a.buyer_name }}</td>
+                                <td>{{a.po_style_no}}</td>
+                <td class=""><a href="#"><b>{{a.receive_qty}}</b></a></td>
+                <td class=""><a href="{% url 'myapp:update_fabric' a.id %}" class="btn btn-sm btn-info"><i class="icon-copy dw dw-edit-file"></i></a></td>
+                <td>{{a.warehouse}}</td>
+
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

@@ -39,5 +39,11 @@ urlpatterns = [
     path('WarehouseMgrView/', WarehouseMgrView.as_view(), name='WarehouseMgrView'),
     path('AccRequestStatusChange/<int:pk>/', AccRequestStatusChange.as_view(), name='AccRequestStatusChange'),
     path('WH_to_Production_Acc/', WH_to_Production_Acc.as_view(), name='WH_to_Production_Acc'),
+
+    path('FabricInvoiceList/', FabricInvoiceList.as_view(),name='FabricInvoiceList'),
+    path('fabriccreate/', FabricProductCreate.as_view(), name='create_fabric'),
+    path('fabricupdate/<int:pk>/', FabricProductUpdate.as_view(), name='update_fabric'),
+    path('delete_fabric_image/<int:pk>/', delete_fabric_image, name='delete_fabric_image'),
+    path('delete_fabric/<int:pk>/', delete_fabric, name='delete_fabric'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

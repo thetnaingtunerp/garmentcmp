@@ -723,6 +723,13 @@ class WH_to_Production_Acc(View):
 
 
 #Fabric Inventory start
+class FabricInvoiceList(View):
+    def get(self,request):
+        fab_inv = FabricInventoy.objects.all()
+        context = {'fab_inv':fab_inv}
+        return render(request,'FabricInvoiceList.html', context)
+
+
 class FabricProductInline():
     form_class = FabricInventoyForm
     model = FabricInventoy
@@ -743,7 +750,7 @@ class FabricProductInline():
                 formset_save_func(formset)
             else:
                 formset.save()
-        return redirect('myapp:AccInventoyList')
+        return redirect('myapp:FabricInvoiceList')
 
     def formset_variants_valid(self, formset):
         """
@@ -803,3 +810,34 @@ class FabricProductUpdate(FabricProductInline, UpdateView):
         }
 
 
+
+def delete_fabric_image(request, pk):
+    try:
+        image = FabricImage.objects.get(id=pk)
+    except FabricImage.DoesNotExist:
+        messages.success(
+            request, 'Object Does not exit'
+            )
+        return redirect('myapp:update_fabric', pk=image.accinv.id)
+
+    image.delete()
+    messages.success(
+            request, 'Image deleted successfully'
+            )
+    return redirect('myapp:update_fabric', pk=image.accinv.id)
+
+
+def delete_fabric(request, pk):
+    try:
+        variant = FabricComposition.objects.get(id=pk)
+    except FabricComposition.DoesNotExist:
+        messages.success(
+            request, 'Object Does not exit'
+            )
+        return redirect('myapp:update_fabric', pk=variant.accinv.id)
+
+    variant.delete()
+    messages.success(
+            request, 'Variant deleted successfully'
+            )
+    return redirect('myapp:update_fabric', pk=variant.accinv.id)

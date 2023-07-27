@@ -92,7 +92,7 @@
                                             </button>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="{% url 'myapp:delete_image' formss.instance.pk %}" type="button" class="btn btn-primary">Yes, Delete</a>
+                                                <a href="{% url 'myapp:delete_fabric_image' formss.instance.pk %}" type="button" class="btn btn-primary">Yes, Delete</a>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
@@ -134,11 +134,12 @@
             </div>
             <table class="table card-header">
                 <thead class="text-secondary">
-                    <th>Size <span style="color: red;" class="required">*</span></th>
-                    <th>Quantity <span style="color: red;" class="required">*</span></th>
-                    <th>Remark <span style="color: red;" class="required">*</span></th>
+                    <th>ပိတ်စ ဖွဲ့စည်းပံု <span style="color: red;" class="required">*</span></th>
+                    <th>အ ေရာင် <span style="color: red;" class="required">*</span></th>
+                    <th>အရှည် (ကိုက်) <span style="color: red;" class="required">*</span></th>
+                    
                     <th>Delete?</th>
-                    <th>Custom Delete btn</th>
+                    <th>Remove</th>
                 </thead>
                 <tbody id="item-variants">  <!-- id="item-inlineformsetname" -->
                     <!-- formset non forms errors -->
@@ -176,7 +177,7 @@
                                             </button>
                                             </div>
                                             <div class="modal-footer">
-                                                <a href="{% url 'myapp:delete_variant' formss.instance.pk %}" type="button" class="btn btn-primary">Yes, Delete</a>
+                                                <a href="{% url 'myapp:delete_fabric' formss.instance.pk %}" type="button" class="btn btn-primary">Yes, Delete</a>
                                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                                             </div>
                                         </div>
