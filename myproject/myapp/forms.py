@@ -114,11 +114,11 @@ class FabricCompositionForm(forms.ModelForm):
 
     class Meta:
         model = FabricComposition
-        fields = ['fabric_composition','color','receive_qty']
+        fields = ['fabric_composition','color', 'fabric_width','receive_qty']
         widgets = {
             'fabric_composition': forms.TextInput(attrs={'class': 'form-control'}),
             'color': forms.TextInput(attrs={'class': 'form-control'}),
-            
+            'fabric_width': forms.TextInput(attrs={'class': 'form-control'}),
             'receive_qty': forms.NumberInput(attrs={'class': 'form-control'}),
             # 'remark': forms.TextInput(attrs={'class': 'form-control'}),
 

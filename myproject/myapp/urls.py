@@ -45,5 +45,6 @@ urlpatterns = [
     path('fabricupdate/<int:pk>/', FabricProductUpdate.as_view(), name='update_fabric'),
     path('delete_fabric_image/<int:pk>/', delete_fabric_image, name='delete_fabric_image'),
     path('delete_fabric/<int:pk>/', delete_fabric, name='delete_fabric'),
+    path('FabricRequesttoWH/', FabricRequesttoWH.as_view(), name='FabricRequesttoWH'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

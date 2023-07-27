@@ -45,4 +45,50 @@
     </div>
 </div>
 
+
+<div class="card-box mb-30">
+    <div class="pd-20">
+        <h4 class="text-blue h4">Fabric Composition List</h4>
+
+    </div>
+    <div class="pb-20">
+        <table class="data-table table stripe hover nowrap">
+            <thead>
+            <tr class="table-success">
+
+                <th class="">PO#</th>
+                <th class="">Fabric Composition</th>
+                                <th class="">Color</th>
+                                <th>Avaiable Qty</th>
+                <th class="">Edit</th>
+                <th class="">Warehouse</th>
+
+
+
+
+            </tr>
+            </thead>
+            <tbody>
+            {% for a in fab_compo %}
+            <tr class="">
+                <td class="table-plus"><a href="#"><b>{{a.accinv}}</b></a></td>
+                <td class="">{{ a.fabric_composition }}</td>
+                                <td>{{a.color}}</td>
+                <td class=""><a href="#"><b>{{a.receive_qty}}</b></a></td>
+                <td class="">{{a.fabric_width}}</td>
+                <td></td>
+
+
+
+            </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
 {% endblock content %}
