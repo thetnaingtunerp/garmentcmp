@@ -34,8 +34,71 @@
                                 <td>{{a.color}}</td>
                 <td class=""><a href="#"><b>{{a.receive_qty}}</b></a></td>
                 <td class="">{{a.fabric_width}}</td>
-                <td></td>
+                <td>
+                    <a
+                            href="#"
+                            class="btn-primary btn-sm"
+                            data-toggle="modal"
+                            data-target="#Medium-modal{{a.id}}"
+                            type="button"
+                    >Request
 
+                    </a>
+
+                    <div
+									class="modal fade"
+									id="Medium-modal{{a.id}}"
+									tabindex="-1"
+									role="dialog"
+									aria-labelledby="myLargeModalLabel"
+									aria-hidden="true"
+								>
+									<div class="modal-dialog modal-dialog-centered">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h4 class="modal-title" id="myLargeModalLabel">
+													Accessories Request Form
+												</h4>
+												<button
+													type="button"
+													class="close"
+													data-dismiss="modal"
+													aria-hidden="true"
+												>
+													×
+												</button>
+											</div>
+											<form action="{% url 'myapp:AccVarientList' %}" method="post">{% csrf_token %}
+											<div class="modal-body">
+												<div class="form-group row">
+                                        <label class="col-sm-12 col-md-4 col-form-label">Style #{{a.id}}/Size:{{a.color}} </label>
+
+                                        <div class="col-sm-12 col-md-12">
+											<input type="text" name="accinv" value="{{a.accinv}}">
+											<input type="text" name="color" value="{{a.color}}">
+											<input type="text" name="size" value="{{a.size}}">
+                                            <input class="form-control" type="number" placeholder="Enter Request Qty" name="request_qty">
+                                        </div>
+                                    </div>
+											</div>
+											<div class="modal-footer">
+												<button
+													type="button"
+													class="btn btn-secondary"
+													data-dismiss="modal"
+												>
+													Close
+												</button>
+												<button type="submit" class="btn btn-primary">
+													Request
+												</button>
+											</div>
+											</form>
+										</div>
+									</div>
+								</div>
+
+                </td>
 
 
             </tr>
