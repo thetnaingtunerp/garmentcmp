@@ -254,3 +254,6 @@ class FabricComposition(models.Model):
 
     def __str__(self):
         return self.fabric_composition
+
+class FabricRequesttoWH(models.Model):
+    pass
