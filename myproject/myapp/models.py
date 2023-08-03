@@ -256,4 +256,12 @@ class FabricComposition(models.Model):
         return self.fabric_composition
 
 class FabricRequesttoWH(models.Model):
-    pass
+    po_style_no = models.CharField(max_length=200,blank=True, null=True)
+    request_fabric_roll = models.CharField(max_length=200, blank=True, null=True)
+    request_fabric_width = models.CharField(max_length=200, blank=True, null=True)
+    color = models.CharField(max_length=200, blank=True, null=True)
+    request_status = models.CharField(max_length=100)
+    request_date = models.DateField(blank=True, null=True)
+    request_usr = models.CharField(max_length=200, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)

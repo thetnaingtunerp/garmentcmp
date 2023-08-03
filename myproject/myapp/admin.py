@@ -44,7 +44,9 @@ class FabricCompositionAdmin(admin.ModelAdmin):
     list_display = ('id','fabric_construction','fabric_width')
 admin.site.register(FabricComposition,FabricCompositionAdmin)
 
-
+class FabricRequesttoWHAdmin(admin.ModelAdmin):
+    list_display =('id', 'po_style_no','color')
+admin.site.register(FabricRequesttoWH,FabricRequesttoWHAdmin)
 
 admin.site.register(OrderQty)
 
