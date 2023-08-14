@@ -735,6 +735,9 @@ class FabricRequesttoWH(View):
         fab_compo = FabricComposition.objects.all()
         context = {'fab_compo':fab_compo}
         return render(request,'FabricRequesttoWH.html', context)
+    
+    def post(self, request):
+        return HttpResponse('Heelo')
 
 
 class FabricProductInline():
