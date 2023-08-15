@@ -9,5 +9,5 @@
             "src": "/(.*)",
             "dest": "myproject/wsgi.py"
         }
-    ]//test
+    ]//remove test
 }
