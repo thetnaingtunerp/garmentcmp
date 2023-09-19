@@ -3,7 +3,7 @@ import datetime
 from django.shortcuts import render,redirect
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Sum,Count,F,Avg
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect,JsonResponse
 from django.views.generic.list import ListView
 from django.views.generic import TemplateView, View, CreateView, DetailView,FormView,ListView,UpdateView
 from django.urls import reverse_lazy
@@ -851,3 +851,10 @@ def delete_fabric(request, pk):
             request, 'Variant deleted successfully'
             )
     return redirect('myapp:update_fabric', pk=variant.accinv.id)
+
+
+
+#Production_Schedule
+
+
+
